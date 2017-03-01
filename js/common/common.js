@@ -3,9 +3,24 @@
     //
 	//NProgress.done();
 define(['jquery', 'jqueryCookie'], function($, undefined){
+
+	// ajax请求loading
+	$(document).ajaxStart(function(){
+		$('.overlay').show();
+	}).ajaxStop(function(){
+		setTimeout(function(){
+			$('.overlay').hide();
+		},1000);
+	});
+
+	// 左侧导航下拉列表
 	$('.navs ul').prev('a').on('click', function () {
 		$(this).next().slideToggle();
 	});
+
+	// 点击左侧导航栏下拉选项后不合上
+	var pathname = window.location.pathname;
+	$('.navs a').removeClass('active').filter('[href="' + pathname + '"]').addClass('active').parents('ul').show();
 
 	// 退出功能
 	$('#logout').on('click', function(){

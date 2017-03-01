@@ -1,4 +1,15 @@
-define(['jquery', 'jqueryCookie'], function($,undefined){
+define(['jquery', 'jqueryCookie', 'common', 'nprogress'], function($, undefined, undefined, nprogress){
+
+    nprogress.done();
+
+    var userInfo = null;
+    try{
+        userInfo = JSON.parse($.cookie('userInfo'))
+    }catch(e){
+        userInfo = {};
+    }
+    $('.login .avatar img').attr('src', userInfo.tc_avatar ? userInfo.tc_avatar : '/img/images/default.png');
+
     /**
      * 1、监听form表单的提交事件
      * 2、事件回调中return false阻止默认的提交

@@ -6,12 +6,17 @@ requirejs.config({
     paths: {
 
         //第三方库的路径配置
-        jquery: 'lib/jquery/jquery.min',
+        jquery: '/lib/jquery/jquery.min',
         bootstrap: 'lib/bootstrap/js/bootstrap.min',
         common: '/js/common/common',
         jqueryCookie: 'lib/jquery-cookie/jquery.cookie',
+        echarts: '/lib/echarts/echarts.common.min',
+        nprogress: 'lib/nprogress/nprogress',
+        template: 'lib/artTemplate-3.0.1/template',
 
         // 自己写的路径配置
+        index: 'js/index',
+
         userList: 'js/user/list',
         userProfile: 'js/user/profile',
 
@@ -42,6 +47,10 @@ requirejs.config({
     }
 });
 
+require(['nprogress'], function(nprogress){
+    nprogress.start();
+});
+
 //所有页面都需要这两个js，先加载他们
 require(['jquery', 'bootstrap', 'common']);
 
@@ -60,6 +69,7 @@ require(['jquery', 'bootstrap', 'common']);
         }
 
         switch (pathname){
+            //user
             case '/html/user/list.html':
                 require(['userList']);
                 break;
@@ -67,6 +77,7 @@ require(['jquery', 'bootstrap', 'common']);
                 require(['userProfile']);
                 break;
 
+            // teacher
             case '/html/teacher/list.html':
                 require(['teacherList']);
                 break;
@@ -74,6 +85,7 @@ require(['jquery', 'bootstrap', 'common']);
                 require(['teacherAdd']);
                 break;
 
+            // home
             case '/html/home/login.html':
                 require(['homeLogin']);
                 break;
@@ -84,6 +96,7 @@ require(['jquery', 'bootstrap', 'common']);
                 require(['homeSettings']);
                 break;
 
+            //course
             case '/html/course/add.html':
                 require(['courseAdd']);
                 break;
@@ -99,14 +112,30 @@ require(['jquery', 'bootstrap', 'common']);
             case '/html/course/category.html':
                 require(['courseCategory']);
                 break;
+            case '/html/course/category_add.html':
+                require(['courseCategoryAdd']);
+                break;
+            case '/html/course/list.html':
+                require(['courseList']);
+                break;
             case '/html/course/topic.html':
                 require(['courseTopic']);
                 break;
+
+            // advert
             case '/html/advert/add.html':
                 require(['advertAdd']);
                 break;
             case '/html/advert/list.html':
                 require(['advertList']);
+                break;
+
+            // index
+            case '/':
+                require(['index']);
+                break;
+            case '/index.html':
+                require(['index']);
                 break;
         }
     });
